@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TaskAPI.Data;
 using TaskAPI.Models;
 
 namespace TaskAPI.Controllers
@@ -14,7 +15,13 @@ namespace TaskAPI.Controllers
         // DELETE => DELETE
 
         // will use in memory storage
-        private static readonly List<ToDoItems> _todoItems = [];
+        // private static readonly List<ToDoItems> _todoItems = [];
+        private readonly TodoDbContext _todoDbContext;
+
+        public TaskController(TodoDbContext todoDbContext)
+        {
+            _todoDbContext = todoDbContext;
+        }
 
         // GET api/tasks
         [HttpGet]
